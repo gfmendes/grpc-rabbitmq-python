@@ -48,3 +48,10 @@ To produce operations:
 <b>python operation_producer/operation_producer.py</b>
 
 </pre>
+
+## Unit testing
+<pre>
+math_operation module is covered with unit testing:
+
+<b>python -m unittest client_processor/test_math_operation.py</b>
+</pre>

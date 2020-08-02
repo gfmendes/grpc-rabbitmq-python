@@ -1,9 +1,7 @@
 from __future__ import print_function
-from functools import reduce
-
+from client_processor import math_operation
 import json
 import logging
-import uuid
 import sys
 import os
 
@@ -48,7 +46,7 @@ class ClientConsumer:
     def process_operation(ch, method, properties, body):
         print("%s - received %s %s %s %r" % (CLIENT_NAME, body, ch, method, properties))
         func = json.loads(body)
-        result = MathOperation().calc(func)
+        result = math_operation.MathOperation().calc(func)
         ClientPersistenceProducer().produce(result)
 
 
@@ -61,36 +59,6 @@ class ClientPersistenceProducer:
     def produce(self, func):
         self.channel.basic_publish(exchange=TOPIC_PERSIST_NAME, routing_key='#', body=json.dumps(func))
 
-
-class MathOperation:
-    func_mapping = {'sum': lambda x, y: x + y,
-                    'sub': lambda x, y: x - y,
-                    'mul': lambda x, y: x * y,
-                    'div': lambda x, y: x / y}
-
-    def calc(self, func):
-        result = 0
-        status = 'fail'
-        try:
-            operand = self.func_mapping[func['operator']]
-            result = reduce(operand, func['operands'])
-            status = 'success'
-        except ArithmeticError as ae:
-            result = ae.__str__()
-        except KeyError as ke:
-            result = 'Operator %s not supported:' % ke.__str__()
-            print("Operator %s not supported!" % func['operator'])
-        except TypeError:
-            result = 'Operands %s not supported:' % func['operands']
-            print("Operands %s not supported!" % func['operands'])
-        except:
-            result = 'generic error'
-            print("Generic error.")
-        finally:
-            func['result'] = result
-            func['status'] = status
-            func['uid'] = uuid.uuid4().__str__();
-            return func
 
 
 if __name__ == '__main__':
