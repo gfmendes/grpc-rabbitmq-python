@@ -1,6 +1,6 @@
 # Code challlenge
 
-##External Dependencies
+## External Dependencies
 RabbitMQ
 - pika 
 
@@ -12,7 +12,7 @@ gRPC
 - grpcio-tools
 - protobuf
 
-##To gerenate gRPC files:
+## To gerenate gRPC files:
 <pre>
 <b>cd server_app
 python -m grpc_tools.protoc -I ../protos --python_out=. --grpc_python_out=.  ../protos/server.proto
@@ -22,15 +22,14 @@ python -m grpc_tools.protoc -I ../protos --python_out=. --grpc_python_out=.  ../
 </b>
 </pre>
 
-##Running the solution:
+## Running the solution:
 <pre>
 Setting up env properties:
-<b>
-export APP_GRPC_SERVER_URL=localhost:50051
+<b>export APP_GRPC_SERVER_URL=localhost:50051
 export APP_RABBITMQ_HOST=localhost
 export APP_RABBITMQ_QUEUE_OPERATION_NAME=queue_operation
 export APP_RABBITMQ_TOPIC_PERSIST_NAME=topic_persistence
-export APP_MONGO_CONNECTION_STR=mongodb+srv://boticario-dev:Dummypasswd@cluster0-zmuno.mongodb.net/newtonai?retryWrites=true&w=majority
+export APP_MONGO_CONNECTION_STR="mongodb+srv://boticario-dev:Dummypasswd@cluster0-zmuno.mongodb.net/newtonai?retryWrites=true&w=majority"
 </b>
 
 Init RabbitMQ:
