@@ -2,14 +2,14 @@
 
 <pre>
 The solution consists in three apps (server_app, client_processor and client_persistence that can be deployed independently and/or in different nodes/servers/containers.
-client_processor comunicates with server_app using RPC protocol
-client_processor consumes from a queue the data to process the calculation, then produces in a persistence topic. 
-client_persistence consumes from persistence topic and updates the database instance bounded to it.
+<b>client_processor</b> comunicates with server_app using RPC protocol
+<b>client_processor</b> consumes from a queue the data to process the calculation, then produces in a persistence topic. 
+<b>client_persistence</b> consumes from persistence topic and updates the database instance bounded to it.
 
 Complementary modules:
-math_operation.py module contains "business rules" and a test case to it.
-server_pb2.py and server_pb2_grpc.py are auto generated classes from gRPOC tool. They need to be packaged in both server_app and client_processor applications.
-server.proto is proto3 class which defines server and client RPC communication.
+<b>math_operation</b> module contains "business rules" and a test case to it.
+<b>server_pb2</b> and server_pb2_grpc</b> are auto generated classes from gRPOC tool. They need to be packaged in both server_app and client_processor applications.
+<b>server.proto</b> is proto3 class which defines server and client RPC communication.
 </pre>
 
 ## External Dependencies
