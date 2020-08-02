@@ -1,5 +1,5 @@
 from __future__ import print_function
-from client_processor import math_operation
+import math_operation
 import json
 import logging
 import sys
@@ -41,7 +41,7 @@ class ClientConsumer:
 
     def read_queue(self):
         self.channel.basic_consume(queue=QUEUE_OPERATION_NAME, on_message_callback=self.process_operation, auto_ack=True)
-        self.log.info("[%s] queue [%s] consuming is starting" % (QUEUE_OPERATION_NAME, CLIENT_NAME))
+        self.log.info("[%s] queue [%s] consuming is starting" % (CLIENT_NAME,QUEUE_OPERATION_NAME))
         self.channel.start_consuming()
 
     def process_operation(self, ch, method, properties, body):
@@ -74,5 +74,5 @@ def set_log():
 
 if __name__ == '__main__':
     set_log()
-    logging.log.info("App params= [%s] [%s] [%s] [%s]", CLIENT_NAME, RABBIT_HOST, QUEUE_OPERATION_NAME, TOPIC_PERSIST_NAME)
+    logging.info("App params= [%s] [%s] [%s] [%s]", CLIENT_NAME, RABBIT_HOST, QUEUE_OPERATION_NAME, TOPIC_PERSIST_NAME)
     RemoteConnection().run()

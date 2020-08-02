@@ -62,5 +62,5 @@ def set_log():
 
 if __name__ == '__main__':
     set_log()
-    logging.log.info("App params= [%s] [%s] [%s] [%s]", CLIENT_NAME, RABBIT_HOST, TOPIC_PERSIST_NAME, MONGO_CONNECTION_STR)
+    logging.info("App params= [%s] [%s] [%s] [%s]", CLIENT_NAME, RABBIT_HOST, TOPIC_PERSIST_NAME, MONGO_CONNECTION_STR)
     ClientPersistenceConsumer().read_queue()
