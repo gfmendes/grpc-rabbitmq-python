@@ -10,7 +10,7 @@ import server_pb2_grpc
 class Server(server_pb2_grpc.ConnectionServicer):
 
     def Connect(self, request, context):
-        print('A new connection request from %s with context %s' % (request.name, context))
+        logging.info('A new connection request from %s' % request.name)
         return server_pb2.ConnectionReply(result='true')
 
 
@@ -19,10 +19,19 @@ def serve():
     server_pb2_grpc.add_ConnectionServicer_to_server(Server(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
-    print('Server is running!')
+    logging.info("Server app is running.")
     server.wait_for_termination()
 
 
+def set_log():
+    logger = logging.getLogger()
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+
+
 if __name__ == '__main__':
-    logging.basicConfig()
+    set_log()
     serve()

@@ -1,6 +1,14 @@
 # Code challlenge
 
+<pre>
+The solution consists in three apps (server_app, client_processor and client_persistence that can be deployed independently and/or in different nodes/servers/containers.
+client_processor comunicates with server_app using RPC protocol
+client_processor consumes from a queue the data to process the calculation, then produces in a persistence topic. 
+client_persistence consumes from persistence topic and updates the database instance bounded to it.
+</pre>
+
 ## External Dependencies
+<pre>
 RabbitMQ
 - pika 
 
@@ -11,6 +19,7 @@ gRPC
 - grpcio
 - grpcio-tools
 - protobuf
+</pre>
 
 ## To gerenate gRPC files:
 <pre>

@@ -36,7 +36,7 @@ class MathOperationTest(unittest.TestCase):
         func = {'operator': 'rrr', 'operands': [10, 5, 4]}
         math_operation.MathOperation().calc(func)
         self.assertEqual('fail', func['status'])
-        self.assertIn("Operator 'rrr' not supported:", func['result'])
+        self.assertIn("Operator 'rrr' not supported", func['result'])
         self.assertIsNotNone(func['uid'])
 
     def test_when_invalid_operands_then_fail_operation(self):
@@ -52,4 +52,3 @@ class MathOperationTest(unittest.TestCase):
         self.assertEqual('fail', func['status'])
         self.assertIn("division by zero", func['result'])
         self.assertIsNotNone(func['uid'])
-
